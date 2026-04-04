@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="frame">
+        <div class="close" id="close"></div>
+        <div class="full" id="max"></div>
+        <div class="hide" id="min"></div>
+    </div>
+
+    <div class="container">
+        <div class="left">
+            <div class="toolbar">
+                <div class="item" id="folder">
+                    <img src="style/folder.png" alt="">
+                </div>
+                <div class="item">
+                    <img src="style/create.png" alt="">
+                </div>
+                <div class="item" id="preview">
+                    <img src="style/yulan.png" alt="">
+                </div>
+                <div class="item" id="del">
+                    <img src="style/del.png" alt="">
+                </div>
+            </div>
+            <div class="note-list" id="note-list"></div>
+        </div>
+        <div class="right" contenteditable="true" spellcheck="false" id="editor"></div>
+        <div class="preview-area" id="previewArea"></div>
+        
+
+    </div>
+</body>
+<script src="script.js"></script>
+</html>

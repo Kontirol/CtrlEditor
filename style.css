@@ -1,0 +1,180 @@
+        /* 让整个页面都可以拖动（推荐） */
+        body {
+            -webkit-app-region: drag;
+            background: #333;
+            margin: 0;
+            padding: 0;
+            border-radius: 15px;
+        }
+
+        /* 重点：按钮、输入框等可交互元素必须禁止拖动，否则无法点击 */
+        button,
+        input,
+        a,
+        select {
+            -webkit-app-region: no-drag;
+        }
+
+        .frame {
+            display: flex;
+            padding-left: 5px;
+        }
+
+        .frame div {
+            margin: 10px 5px;
+            border-radius: 50px;
+            width: 12px;
+            height: 12px;
+            -webkit-app-region: no-drag;
+        }
+
+        .frame .close {
+
+            background-color: #FF5F57;
+        }
+
+        .frame .full {
+            background-color: #FFBD2E;
+        }
+
+        .frame .hide {
+            background-color: #28C840;
+        }
+
+        .container {
+            display: flex;
+            -webkit-app-region: no-drag;
+        }
+
+        .container .left {
+            width: 300px;
+            height: calc(100vh - 32px);
+            background-color: #333;
+            overflow: auto;
+        }
+        .container .left .toolbar{
+            display: flex;
+            padding: 10px;
+        }
+        .container .left .toolbar .item{
+            flex: 1;
+            height: 35px;
+            border: 1px solid #6c6c6c;
+            margin: 5px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.6s;
+        }
+        .container .left .toolbar .item:hover{
+            background: #aaa;
+            transition: all 0.6s;
+        }
+        .container .left .toolbar .item img{
+            width: 35%;
+            height: 60%;
+        }
+
+        .container .left .note-list{
+        }
+        .container .left .note-list .note-item{
+            height: 100px;
+            margin: 10px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10px;
+            transition: all 0.6s;
+        }
+        .container .left .note-list .note-item.select{
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .container .left .note-list .note-item:hover{
+            transition: all 0.6s;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .container .left .note-list .note-item .note-title{
+            font-size: 20px;
+            color: #fff;
+        }
+        .container .left .note-list .note-item .note-time{
+            font-size: 14px;
+            color: #aaa;
+        }
+
+
+        .container .right {
+            width: calc(100vw - 310px);
+            background-color: #414040;
+            height: calc(100vh - 52px);
+            color: #fff;
+            font-size: 20px;
+            overflow: auto;
+            /* 核心：清除所有边框 */
+            border-radius: 10px;
+            border: none !important;
+            /* 核心：清除点击聚焦时的蓝色轮廓（最容易忽略） */
+            outline: none !important;
+            /* 可选：清除内边距，让内容更贴合 */
+            padding: 10px;
+            /* 可选：清除外边距 */
+            margin: 0;
+            /* 可选：禁止拖拽调整大小（textarea 专用） */
+            resize: none;
+            /* 可选：让元素自适应内容 */
+            min-height: 1em;
+            white-space: pre-wrap;
+        }
+
+
+
+
+/* 预览区样式，默认隐藏 */
+.preview-area {
+
+    width: calc(100vw - 310px);
+    height: calc(100vh - 52px);
+    overflow: auto;
+
+  display: none;
+  padding: 20px;
+  background: #1e1e1e;
+  color: #ddd;
+  font-size: 15px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-y: auto;
+}
+
+/* 预览时隐藏编辑器，显示预览区 */
+.preview-mode #editor {
+  display: none;
+}
+.preview-mode .preview-area {
+  display: block;
+}
+
+        /* 全局美化滚动条（你的编辑器自动生效） */
+::-webkit-scrollbar {
+  width: 8px;    /* 垂直滚动条宽度 */
+  height: 8px;   /* 水平滚动条高度 */
+}
+
+/* 滚动条轨道（背景） */
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+  border-radius: 4px;
+}
+
+/* 滚动条滑块（能拖动的部分） */
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+/* 鼠标放上去变亮 */
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
