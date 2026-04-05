@@ -73,7 +73,7 @@
         }
         .container .left .toolbar .item img{
             width: 35%;
-            height: 60%;
+            height: 50%;
         }
 
         .container .left .note-list{
@@ -126,6 +126,8 @@
             /* 可选：让元素自适应内容 */
             min-height: 1em;
             white-space: pre-wrap;
+            /* 修复：禁止 contenteditable 元素的拖动区域 */
+            -webkit-app-region: no-drag;
         }
 
 
@@ -133,11 +135,10 @@
 
 /* 预览区样式，默认隐藏 */
 .preview-area {
-
+border-radius: 10px;
     width: calc(100vw - 310px);
-    height: calc(100vh - 52px);
+    height: calc(100vh - 72px);
     overflow: auto;
-
   display: none;
   padding: 20px;
   background: #1e1e1e;
@@ -146,6 +147,185 @@
   line-height: 1.8;
   white-space: pre-wrap;
   overflow-y: auto;
+}
+
+/* 预览区增强样式 */
+.preview-area h1,
+.preview-area h2,
+.preview-area h3,
+.preview-area h4,
+.preview-area h5,
+.preview-area h6 {
+  color: #fff;
+  margin: 1em 0 0.5em;
+  font-weight: 600;
+}
+
+.preview-area h1 { font-size: 2em; border-bottom: 1px solid #444; padding-bottom: 0.3em; }
+.preview-area h2 { font-size: 1.5em; border-bottom: 1px solid #444; padding-bottom: 0.3em; }
+.preview-area h3 { font-size: 1.25em; }
+.preview-area h4 { font-size: 1em; }
+
+.preview-area code {
+  background: #333;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Consolas', monospace;
+  font-size: 0.9em;
+}
+
+.preview-area pre {
+  background: #2d2d2d;
+  padding: 15px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+
+.preview-area pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.preview-area ul,
+.preview-area ol {
+  padding-left: 2em;
+  margin: 0.5em 0;
+}
+
+.preview-area li {
+  margin: 0.3em 0;
+}
+
+.preview-area table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+
+.preview-area td,
+.preview-area th {
+  border: 1px solid #444;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.preview-area th {
+  background: #333;
+}
+
+.preview-area hr {
+  border: none;
+  border-top: 1px solid #444;
+  margin: 2em 0;
+}
+
+.preview-area a {
+  color: #6cb6ff;
+  text-decoration: none;
+}
+
+.preview-area a:hover {
+  text-decoration: underline;
+}
+
+.preview-area blockquote {
+  border-left: 4px solid #555;
+  margin: 1em 0;
+  padding-left: 1em;
+  color: #999;
+}
+
+/* Toast 提示 */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #4CAF50;
+  color: #fff;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 14px;
+  z-index: 1001;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+}
+
+/* 弹窗样式 */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.dialog {
+  background: #333;
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 300px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.dialog-title {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.dialog input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background: #222;
+  color: #fff;
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.dialog input:focus {
+  border-color: #6cb6ff;
+}
+
+.dialog-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.dialog-buttons button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dialog-buttons #newFileCancel {
+  background: #555;
+  color: #fff;
+}
+
+.dialog-buttons #newFileConfirm {
+  background: #4CAF50;
+  color: #fff;
 }
 
 /* 预览时隐藏编辑器，显示预览区 */

@@ -18,24 +18,41 @@
     <div class="container">
         <div class="left">
             <div class="toolbar">
-                <div class="item" id="folder">
+                <div class="item" id="folder" title="打开文件夹">
                     <img src="style/folder.png" alt="">
                 </div>
-                <div class="item">
+                <div class="item" id="create" title="新建文件">
                     <img src="style/create.png" alt="">
                 </div>
-                <div class="item" id="preview">
+                <div class="item" id="save" title="保存文件">
+                    <img src="style/save.png" alt="">
+                </div>
+                <div class="item" id="preview" title="预览">
                     <img src="style/yulan.png" alt="">
                 </div>
-                <div class="item" id="del">
+                <div class="item" id="del" title="删除文件">
                     <img src="style/del.png" alt="">
                 </div>
             </div>
             <div class="note-list" id="note-list"></div>
         </div>
         <div class="right" contenteditable="true" spellcheck="false" id="editor"></div>
-        <div class="preview-area" id="previewArea"></div>
+    <div class="preview-area" id="previewArea"></div>
         
+    <!-- 新建文件弹窗 -->
+    <div id="newFileDialog" class="dialog-overlay" style="display:none;">
+        <div class="dialog">
+            <div class="dialog-title">新建文件</div>
+            <input type="text" id="newFileName" placeholder="请输入文件名（不需要 .md 后缀）" value="untitled">
+            <div class="dialog-buttons">
+                <button id="newFileCancel">取消</button>
+                <button id="newFileConfirm">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast 提示 -->
+    <div id="toast" class="toast" style="display:none;">保存成功</div>
 
     </div>
 </body>

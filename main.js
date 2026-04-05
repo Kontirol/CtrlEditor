@@ -45,6 +45,62 @@ ipcMain.handle('file:readMDFiles', async (_, folderPath) => {
     })
   return mdFiles
 })
+
+// 🔥 保存文件
+ipcMain.handle('file:saveFile', async (_, filePath, content) => {
+  fs.writeFileSync(filePath, content, 'utf8')
+  return true
+})
+
+// 🔥 另存为对话框
+ipcMain.handle('dialog:saveAs', async () => {
+  const { canceled, filePath } = await dialog.showSaveDialog({
+    title: '保存 Markdown 文件',
+    defaultPath: 'untitled.md',
+    filters: [
+      { name: 'Markdown', extensions: ['md'] }
+    ]
+  })
+  if (canceled) return null
+  return filePath
+})
+
+// 🔥 删除文件
+ipcMain.handle('file:deleteFile', async (_, filePath) => {
+  try {
+    fs.unlinkSync(filePath)
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: err.message }
+  }
+})
+
+ // 🔥 创建新文件
+ipcMain.handle('file:createFile', async (_, folderPath, fileName, content) => {
+  try {
+    const fullPath = path.join(folderPath, fileName)
+    if (fs.existsSync(fullPath)) {
+      return { success: false, error: '文件已存在' }
+    }
+    fs.writeFileSync(fullPath, content, 'utf8')
+    return { success: true, path: fullPath }
+  } catch (err) {
+    return { success: false, error: err.message }
+  }
+})
+
+// 🔥 读取单个文件
+ipcMain.handle('file:readFile', async (_, filePath) => {
+  try {
+    if (fs.existsSync(filePath)) {
+      const content = fs.readFileSync(filePath, 'utf8')
+      return { success: true, content }
+    }
+    return { success: false, error: '文件不存在' }
+  } catch (err) {
+    return { success: false, error: err.message }
+  }
+})
 }
 app.whenReady().then(createWindow)
 app.on('window-all-closed', () => app.quit())
